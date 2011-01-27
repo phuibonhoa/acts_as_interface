@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "acts_as_interface.gemspec",
     "lib/acts_as_interface.rb",
     "test/helper.rb",
     "test/test_acts_as_interface.rb"
