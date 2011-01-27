@@ -38,7 +38,7 @@ In the spirit of self documenting code, acts_as_interface allows you to easily d
   Student.foo #raises NotImplementedError
 
 
-=== MODULE
+=== MODULE (on include)
 
   module ActsAsPerson    
     def self.included(base)
@@ -58,6 +58,34 @@ In the spirit of self documenting code, acts_as_interface allows you to easily d
   student = Student.first
   student.name #works as usual
   student.dance #raises NotImplementedError
+  
+=== MODULE (from method call)
+
+  module ActsAsPerson    
+    module ClassMethods
+      def acts_as_person
+        include ActsAsInterface
+        abstract_methods :name, :dance
+      end
+    end
+    
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+  end
+
+  class Student < ActiveRecord::Base
+    include acts_as_person
+    
+    #include or invoke modules that defines name but not dance
+    
+    acts_as_person #apply interface
+  end
+  
+  student = Student.first
+  student.name #works as usual
+  student.dance #raises NotImplementedError
+  
 
 == CONTRIBUTING
 
