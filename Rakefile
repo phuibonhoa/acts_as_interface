@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "acts_as_interface"
   gem.homepage = "http://github.com/phuibonhoa/acts_as_interface"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Easily define abstract methods and callbacks for superclasses and modules}
+  gem.description = %Q{Easily define abstract methods and callbacks for superclasses and modules}
   gem.email = "philippe.huibonhoa@bookrenter.com"
   gem.authors = ["Philippe Huibonhoa"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
