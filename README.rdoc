@@ -28,14 +28,14 @@ In the spirit of self documenting code, acts_as_interface allows you to easily d
   end
   
   me = Student.new
-  me.dance #raises NotImplementedError
+  me.dance ## => raises NotImplementedError
   
-  me.play #raises NoMethodError: private method `play` called
-  me.send(:play) #raises NotImplementedError
+  me.play ## => raises NoMethodError: private method `play` called
+  me.send(:play) ## => raises NotImplementedError
   
-  me.prance #calls empty method prance
+  me.prance ## calls empty method prance
   
-  Student.foo #raises NotImplementedError
+  Student.foo ## => raises NotImplementedError
 
 
 === MODULE (on include)
@@ -56,8 +56,8 @@ In the spirit of self documenting code, acts_as_interface allows you to easily d
   end
   
   student = Student.first
-  student.name #works as usual
-  student.dance #raises NotImplementedError
+  student.name ## works as usual
+  student.dance ## => raises NotImplementedError
   
 === MODULE (from method call)
 
@@ -79,12 +79,12 @@ In the spirit of self documenting code, acts_as_interface allows you to easily d
     
     #include or invoke modules that defines name but not dance
     
-    acts_as_person #apply interface
+    acts_as_person ## apply interface
   end
   
   student = Student.first
-  student.name #works as usual
-  student.dance #raises NotImplementedError
+  student.name ## works as usual
+  student.dance ## => raises NotImplementedError
   
 
 == CONTRIBUTING
