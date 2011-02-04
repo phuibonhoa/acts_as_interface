@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Philippe Huibonhoa"]
-  s.date = %q{2011-01-27}
+  s.date = %q{2011-02-04}
   s.description = %q{Easily define abstract methods and callbacks for superclasses and modules}
   s.email = %q{philippe.huibonhoa@bookrenter.com}
   s.extra_rdoc_files = [
@@ -47,20 +47,23 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
-      s.add_development_dependency(%q<activesupport>, ["= 2.3.4"])
+      s.add_development_dependency(%q<activesupport>, [">= 2.3.4"])
+      s.add_runtime_dependency(%q<activesupport>, [">= 2.3.4"])
     else
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<rcov>, [">= 0"])
-      s.add_dependency(%q<activesupport>, ["= 2.3.4"])
+      s.add_dependency(%q<activesupport>, [">= 2.3.4"])
+      s.add_dependency(%q<activesupport>, [">= 2.3.4"])
     end
   else
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<rcov>, [">= 0"])
-    s.add_dependency(%q<activesupport>, ["= 2.3.4"])
+    s.add_dependency(%q<activesupport>, [">= 2.3.4"])
+    s.add_dependency(%q<activesupport>, [">= 2.3.4"])
   end
 end
 
