@@ -2,7 +2,7 @@
 
 == INSTALL
 
-  gem install timecop
+  gem install acts_as_interface
 
 == DESCRIPTION
 

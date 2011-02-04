@@ -1,5 +1,3 @@
-require 'active_support'
-
 #Include ActsAsInterface to easily define abstract methods
 #Example: Superclass
 # class Person
