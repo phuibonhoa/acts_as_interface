@@ -91,7 +91,7 @@ In the spirit of self documenting code, `acts_as_interface` allows you to easily
 
 ![BookRenter.com Logo](http://assets0.bookrenter.com/images/header/bookrenter_logo.gif "BookRenter.com")
 
-`ActsAsInterface` is currently maintained by Philippe Huibonhoa and funded by [BookRenter.com](:http://www.bookrenter.com "BookRenter.com").
+ActsAsInterface is currently maintained by Philippe Huibonhoa and funded by [BookRenter.com](:http://www.bookrenter.com "BookRenter.com").
 
 ## CONTRIBUTING
 
