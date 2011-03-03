@@ -32,8 +32,9 @@ require 'active_support'
 # end
 class Object
   def define_abstract_method(abstract_method_name, options)
-    columns, error_on_column_load = respond_to?(:columns) ? [columns, false] : [[], false] rescue [nil, true]
-    unless method_defined?(abstract_method_name) or error_on_column_load or columns.any? { |column| column.name.to_sym == abstract_method_name }
+    model_columns, error_on_column_load = respond_to?(:columns) ? [columns, false] : [[], false] rescue [nil, true]
+    model_columns ||= []
+    unless method_defined?(abstract_method_name) or error_on_column_load or model_columns.any? { |column| column.name.to_sym == abstract_method_name }
       define_method(abstract_method_name) do |*abstract_method_args|
         if options.has_key?(:default)
           options[:default]
