@@ -8,9 +8,11 @@ class AttributeActsAsInterfaceTest < Test::Unit::TestCase
     def existing_method
       true
     end
-        
-    def self.existing_class_method
-      true
+    
+    class << self
+      def existing_class_method
+        true
+      end
     end
     
     abstract_methods :im, :existing_method
@@ -29,8 +31,10 @@ class AttributeActsAsInterfaceTest < Test::Unit::TestCase
       "hello #{word}"
     end
     
-    def self.cm(word)
-      "#{word} world"
+    class << self
+      def cm(word)
+        "#{word} world"
+      end
     end
   end
   

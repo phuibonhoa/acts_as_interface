@@ -1,3 +1,5 @@
+require 'active_support'
+
 #Include ActsAsInterface to easily define abstract methods
 #Example: Superclass
 # class Person
@@ -35,7 +37,8 @@ class Object
         if options.has_key?(:default)
           options[:default]
         else 
-          raise NotImplementedError, "#{abstract_method_name} not defined for #{self.class}"
+          class_name = options[:for] == :class ? self : self.class
+          raise NotImplementedError, "#{abstract_method_name} not defined for #{class_name}"
         end      
       end
     
@@ -55,9 +58,7 @@ module ActsAsInterface
       options = args.extract_options!
       args.each do |abstract_method_name|
         if options[:for] == :class
-          (class << self; self; end).instance_eval do
-            define_abstract_method(abstract_method_name, options)
-          end
+          (class << self; self; end).define_abstract_method(abstract_method_name, options)
         else
           define_abstract_method(abstract_method_name, options)
         end        
