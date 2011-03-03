@@ -5,22 +5,22 @@
 
 Gem::Specification.new do |s|
   s.name = %q{acts_as_interface}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Philippe Huibonhoa"]
-  s.date = %q{2011-02-04}
+  s.date = %q{2011-03-02}
   s.description = %q{Easily define abstract methods and callbacks for superclasses and modules}
   s.email = %q{philippe.huibonhoa@bookrenter.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
     "Gemfile",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
     "acts_as_interface.gemspec",
