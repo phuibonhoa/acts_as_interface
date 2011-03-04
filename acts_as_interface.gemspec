@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{acts_as_interface}
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Philippe Huibonhoa"]
@@ -25,8 +25,8 @@ Gem::Specification.new do |s|
     "VERSION",
     "acts_as_interface.gemspec",
     "lib/acts_as_interface.rb",
-    "test/helper.rb",
-    "test/test_acts_as_interface.rb"
+    "test/acts_as_interface_test.rb",
+    "test/helper.rb"
   ]
   s.homepage = %q{http://github.com/phuibonhoa/acts_as_interface}
   s.licenses = ["MIT"]
@@ -34,8 +34,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Easily define abstract methods and callbacks for superclasses and modules}
   s.test_files = [
-    "test/helper.rb",
-    "test/test_acts_as_interface.rb"
+    "test/acts_as_interface_test.rb",
+    "test/helper.rb"
   ]
 
   if s.respond_to? :specification_version then
