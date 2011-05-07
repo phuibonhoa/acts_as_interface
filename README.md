@@ -8,36 +8,75 @@
 
 In the spirit of self documenting code, `acts_as_interface` allows you to easily define `abstract_methods` and callbacks just by listing them at the top of a superclass or module.  Child classes or classes that include the module must implement abstract_methods or a `NotImplementedError` is raised when the method is called.
 
-## EXAMPLES
+## EXAMPLE
+    class Person
+      include acts_as_interface
+  
+      # all subclasses are expected to define id and worth
+      abstract_methods :id 
+      abstract_methods :worth, :visibility => :private
+  
+      # defines an empty method called before_sleep, which I call in sleep.  Subclasses can override before_sleep if they need to.
+      callbacks :before_sleep 
+  
+      def sleep
+        before_sleep
+        close_eyes
+        dream
+      end
+    end
 
-### SUPERCLASS
+    class Student < Person
+      def id
+        student_id
+      end
+  
+      def before_sleep
+        set_alarm
+      end
+  
+      private  
+      def worth
+        0
+      end
+    end
+
+    class Employee < Person
+      def id
+        employee_number
+      end
+  
+      private
+      def worth
+        salary
+      end
+    end
+
+## OPTIONS
+
+Both `abstract_methods` and `callbacks` take options that accept the following keys
+ 
+visibility - :private, :protected, or :public (default is public)
+
+    abstract_methods :internal_counter, :visibility => private
+
+for - :class or :instance (default is instance)  - is the method a class method or an instance method?
+ 
+    abstract_methods :category, :for => :class
+
+## USING WITH DIFFERENT TYPES OF INHERITANCE
+
+### SUBCLASSING
 
     class Person
       include acts_as_interface
-      
       abstract_methods :dance, :eat
-      abstract_methods :sleep, :play, :visibility => :private
-      callbacks :prance
-    
-      abstract_methods :foo, :for => :class
-      callbacks :france, :for => :class, :visibility => :protected
     end
     
     class Student < Person
-      
+      # define dance and eat here
     end
     
-    me = Student.new
-    me.dance ## => raises NotImplementedError
-    
-    me.play ## => raises NoMethodError: private method `play` called
-    me.send(:play) ## => raises NotImplementedError
-    
-    me.prance ## calls empty method prance
-    
-    Student.foo ## => raises NotImplementedError
-
-
 ### MODULE (on include)
 
     module ActsAsPerson    
@@ -52,12 +91,9 @@ In the spirit of self documenting code, `acts_as_interface` allows you to easily
     class Student < ActiveRecord::Base
       include acts_as_person
       
-      #name is an attribute (ie t.string :name)
+      # define name and dance here
+      # still works if name or dance is previously defined (ie if name were an attribute of the Student model - t.string :name)
     end
-    
-    student = Student.first
-    student.name ## works as usual
-    student.dance ## => raises NotImplementedError
   
 ### MODULE (from method call)
 
@@ -76,15 +112,8 @@ In the spirit of self documenting code, `acts_as_interface` allows you to easily
   
     class Student < ActiveRecord::Base
       include acts_as_person
-      
-      #include or invoke modules that defines name but not dance
-      
-      acts_as_person ## apply interface
+      acts_as_person # apply interface
     end
-    
-    student = Student.first
-    student.name ## works as usual
-    student.dance ## => raises NotImplementedError
   
   
 ## Credits
