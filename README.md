@@ -9,48 +9,51 @@
 In the spirit of self documenting code, `acts_as_interface` allows you to easily define `abstract_methods` and callbacks just by listing them at the top of a superclass or module.  Child classes or classes that include the module must implement abstract_methods or a `NotImplementedError` is raised when the method is called.
 
 ## EXAMPLE
-    class Person
-      include acts_as_interface
-  
-      # all subclasses are expected to define id and worth
-      abstract_methods :id 
-      abstract_methods :worth, :visibility => :private
-  
-      # defines an empty method called before_sleep, which I call in sleep.  Subclasses can override before_sleep if they need to.
-      callbacks :before_sleep 
-  
-      def sleep
-        before_sleep
-        close_eyes
-        dream
-      end
-    end
+    
+```ruby
+class Person
+  include acts_as_interface
 
-    class Student < Person
-      def id
-        student_id
-      end
-  
-      def before_sleep
-        set_alarm
-      end
-  
-      private  
-      def worth
-        0
-      end
-    end
+  # all subclasses are expected to define id and worth
+  abstract_methods :id 
+  abstract_methods :worth, :visibility => :private
 
-    class Employee < Person
-      def id
-        employee_number
-      end
-  
-      private
-      def worth
-        salary
-      end
-    end
+  # defines an empty method called before_sleep, which I call in sleep.  Subclasses can override before_sleep if they need to.
+  callbacks :before_sleep 
+
+  def sleep
+    before_sleep
+    close_eyes
+    dream
+  end
+end
+
+class Student < Person
+  def id
+    student_id
+  end
+
+  def before_sleep
+    set_alarm
+  end
+
+  private  
+  def worth
+    0
+  end
+end
+
+class Employee < Person
+  def id
+    employee_number
+  end
+
+  private
+  def worth
+    salary
+  end
+end
+```
 
 ## OPTIONS
 
@@ -58,64 +61,70 @@ Both `abstract_methods` and `callbacks` take options that accept the following k
  
 visibility - :private, :protected, or :public (default is public)
 
-    abstract_methods :internal_counter, :visibility => private
+```ruby
+abstract_methods :internal_counter, :visibility => private
+```
 
 for - :class or :instance (default is instance)  - is the method a class method or an instance method?
- 
-    abstract_methods :category, :for => :class
+
+```ruby
+abstract_methods :category, :for => :class
+```
 
 ## USING WITH DIFFERENT TYPES OF INHERITANCE
 
 ### SUBCLASSING
+```ruby
+class Person
+  include acts_as_interface
+  abstract_methods :dance, :eat
+end
 
-    class Person
-      include acts_as_interface
-      abstract_methods :dance, :eat
-    end
-    
-    class Student < Person
-      # define dance and eat here
-    end
+class Student < Person
+  # define dance and eat here
+end
+```
     
 ### MODULE (on include)
+```ruby
+module ActsAsPerson    
+  def self.included(base)
+    base.instance_eval do
+      include ActsAsInterface
+      abstract_methods :name, :dance
+    end
+  end
+end
 
-    module ActsAsPerson    
-      def self.included(base)
-        base.instance_eval do
-          include ActsAsInterface
-          abstract_methods :name, :dance
-        end
-      end
-    end
+class Student < ActiveRecord::Base
+  include acts_as_person
   
-    class Student < ActiveRecord::Base
-      include acts_as_person
-      
-      # define name and dance here
-      # still works if name or dance is previously defined (ie if name were an attribute of the Student model - t.string :name)
-    end
+  # define name and dance here
+  # still works if name or dance is previously defined (ie if name were an attribute of the Student model - t.string :name)
+end
+```
   
 ### MODULE (from method call)
+```ruby
+module ActsAsPerson    
+  module ClassMethods
+    def acts_as_person
+      include ActsAsInterface
+      abstract_methods :name, :dance
+    end
+  end
+  
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+end
 
-    module ActsAsPerson    
-      module ClassMethods
-        def acts_as_person
-          include ActsAsInterface
-          abstract_methods :name, :dance
-        end
-      end
-      
-      def self.included(base)
-        base.extend(ClassMethods)
-      end
-    end
-  
-    class Student < ActiveRecord::Base
-      include acts_as_person
-      acts_as_person # apply interface
-    end
-  
-  
+class Student < ActiveRecord::Base
+  include acts_as_person
+  acts_as_person # apply interface
+end
+```
+
 ## Credits
 
 ![BookRenter.com Logo](http://assets0.bookrenter.com/images/header/bookrenter_logo.gif "BookRenter.com")
