@@ -12,7 +12,7 @@ In the spirit of self documenting code, `acts_as_interface` allows you to easily
     
 ```ruby
 class Person
-  include acts_as_interface
+  include ActsAsInterface
 
   # all subclasses are expected to define id and worth
   abstract_methods :id 
@@ -76,7 +76,7 @@ abstract_methods :category, :for => :class
 ### SUBCLASSING
 ```ruby
 class Person
-  include acts_as_interface
+  include ActsAsInterface
   abstract_methods :dance, :eat
 end
 
@@ -90,7 +90,7 @@ end
 module ActsAsPerson    
   def self.included(base)
     base.instance_eval do
-      include ActsAsInterface
+      include ::ActsAsInterface
       abstract_methods :name, :dance
     end
   end
@@ -109,7 +109,7 @@ end
 module ActsAsPerson    
   module ClassMethods
     def acts_as_person
-      include ActsAsInterface
+      include ::ActsAsInterface
       abstract_methods :name, :dance
     end
   end
